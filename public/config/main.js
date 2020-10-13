@@ -9,8 +9,8 @@ function getEnvironment(){
         }, {
             name: "https://suporte.fb704.com.br/",
             hosts : {
-                web : 'https://suporte.fb704.com.br/',
-                api : 'https://suporte.fb704.com.br/api/',
+                web : 'https://apieasy.madgic.com.br/',
+                api : 'https://apieasy.madgic.com.br/api/',
             }
         },
 
