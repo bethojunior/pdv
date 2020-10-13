@@ -1,0 +1,61 @@
+::-webkit-scrollbar {
+    width: 10px;
+    display: none;
+
+}
+
+/* Fundo da barra de rolagem */
+::-webkit-scrollbar-track-piece {
+    background-color: #05395b;
+    border-left: 1px solid #CCC;
+}
+
+/* Cor do indicador de rolagem */
+::-webkit-scrollbar-thumb:vertical,
+::-webkit-scrollbar-thumb:horizontal {
+    background-color: #3490cc;
+}
+
+/* Cor do indicador de rolagem - ao passar o mouse */
+::-webkit-scrollbar-thumb:vertical:hover,
+::-webkit-scrollbar-thumb:horizontal:hover {
+    background-color: #717171;
+}
+tr{
+    cursor: pointer!important;
+}
+.hidden{
+    display: none;
+}
+.opacity-none{
+    opacity: 0;
+}
+.hide{
+    position: absolute!important;
+    opacity: 0!important;
+    left: 0!important;
+    margin-left: -50vw!important;
+}
+.ml-1{
+    margin-left: 1vw!important;
+}
+.away{
+    position: fixed!important;
+    top: 0!important;
+    left: 0!important;
+    margin-left: -100vw!important;
+    z-index: -999!important;
+    opacity: 0!important;
+}
+.center{
+    display: flex!important;
+    justify-content: center!important;
+    align-content: center!important;
+}
+@media (min-width: 992px){
+    .sidebar-mini .nav-sidebar, .sidebar-mini .nav-sidebar .nav-link, .sidebar-mini .nav-sidebar>.nav-header {
+        white-space: inherit!important;
+        overflow: hidden;
+    }
+}
+
