@@ -27,11 +27,12 @@
             </select>
         </div>
         <div class="form-group col-lg-12">
-            <input class="btn btn-success" type="submit" value="Abrir mesa">
+            <input class="btn btn-success" type="submit" value="Adcionar">
         </div>
     </form>
 
     <hr>
+
     <h2>Listagem de mesas ativas</h2>
 
     <table class="table table-striped">
@@ -39,20 +40,18 @@
             <tr>
                 <th scope="col">Mesa</th>
                 <th scope="col">Atendente</th>
+                <th scope="col">Aberta</th>
                 <th scope="col">Produtos</th>
             </tr>
         </thead>
         <tbody>
-{{--        {{ $sales }}--}}
             @foreach($sales as $sale)
                 <tr class="table" id="{{ $sale->id }}" products="{{ $sale->products }}">
                     <th>{{ $sale->table }}</th>
                     <td>{{ $sale['user'][0]['name'] }}</td>
+                    <td>{{ \Carbon\Carbon::parse($sale->created_at)->format('d/m/Y - H:m:s')}}</td>
                     <td>
                         <button data="{{ $sale }}" products="{{ $sale->products }}" id="{{ $sale->id }}" class="btn btn-info show-products">Ver itens</button>
-                    </td>
-                    <td>
-                        <button data="{{ $sale }}" products="{{ $sale->products }}" id="{{ $sale->id }}" class="btn btn-danger ">Encerrar mesa</button>
                     </td>
                 </tr>
             @endforeach
