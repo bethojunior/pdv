@@ -95,7 +95,6 @@ class UserRepository extends AbstractRepository
     {
         return $this->getModel()
             ::join('user_status', 'users.user_status_id', '=', 'user_status.id')
-            ->leftJoin('enterprises', 'users.enterprises_id', '=', 'enterprises.id')
             ->select(
                 'users.id AS user_id',
                 'users.name',
@@ -104,8 +103,7 @@ class UserRepository extends AbstractRepository
                 'users.picture',
                 'users.phone',
                 'users.password',
-                'user_status.name AS status',
-                'enterprises.name as enterprise'
+                'user_status.name AS status'
             )
 
             ->where('users.email','=',$data['email'])
