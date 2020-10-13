@@ -7,7 +7,7 @@ function getEnvironment(){
                 api : 'http://127.0.0.1:8000/api/',
             }
         }, {
-            name: "https://suporte.fb704.com.br/",
+            name: "https://apieasy.madgic.com.br/",
             hosts : {
                 web : 'https://apieasy.madgic.com.br/',
                 api : 'https://apieasy.madgic.com.br/api/',
