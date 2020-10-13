@@ -95,7 +95,7 @@ class UserRepository extends AbstractRepository
     {
         return $this->getModel()
             ::join('user_status', 'users.user_status_id', '=', 'user_status.id')
-            ::with('userStatus')
+            ->with('userStatus')
             ->with('userType')
             ->where('users.email','=',$data['email'])
             ->first();
