@@ -3,6 +3,7 @@ $(document).ready(function() {
 });
 
 elementProperty.addEventInElement('.show-products','onclick',function () {
+    let totalValue = 0;
     elementProperty.getElement('#mount-products-by-table',these => {
         these.innerHTML = '';
     })
@@ -19,6 +20,8 @@ elementProperty.addEventInElement('.show-products','onclick',function () {
             })
             let data = item.product;
             these.innerHTML += data.map(item => {
+                totalValue = (totalValue + item.value);
+                console.log(item.value)
                 return `
                     <tr>
                         <th>${item.name}</th>
@@ -26,6 +29,9 @@ elementProperty.addEventInElement('.show-products','onclick',function () {
                         <td>${Mask.maskMoney(item.value)}</td>
                     </tr>
                 `;
+            })
+            elementProperty.getElement('#value-total', total => {
+                total.innerHTML = 'R$ '+ Mask.maskMoney(totalValue);
             })
         });
     })

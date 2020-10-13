@@ -38,7 +38,6 @@
         <thead>
             <tr>
                 <th scope="col">Mesa</th>
-                <th scope="col">Status</th>
                 <th scope="col">Atendente</th>
                 <th scope="col">Produtos</th>
             </tr>
@@ -48,9 +47,13 @@
             @foreach($sales as $sale)
                 <tr class="table" id="{{ $sale->id }}" products="{{ $sale->products }}">
                     <th>{{ $sale->table }}</th>
-                    <td>{{ $sale->status }}</td>
                     <td>{{ $sale['user'][0]['name'] }}</td>
-                    <td><button data="{{ $sale }}" products="{{ $sale->products }}" id="{{ $sale->id }}" class="btn btn-info show-products">Ver itens</button></td>
+                    <td>
+                        <button data="{{ $sale }}" products="{{ $sale->products }}" id="{{ $sale->id }}" class="btn btn-info show-products">Ver itens</button>
+                    </td>
+                    <td>
+                        <button data="{{ $sale }}" products="{{ $sale->products }}" id="{{ $sale->id }}" class="btn btn-danger ">Encerrar mesa</button>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
@@ -76,8 +79,13 @@
                         </tr>
                         </thead>
                         <tbody id="mount-products-by-table">
-
                         </tbody>
+                        <tr class="mt-2">
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th id="value-total"></th>
+                        </tr>
                     </table>
                 </div>
                 <div class="modal-footer">

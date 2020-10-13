@@ -30,7 +30,8 @@ class SaleService
 
     /**
      * @param array $request
-     * @return Sale
+     * @return Sale|bool
+     * @throws \Exception
      */
     public function insert(array $request)
     {
@@ -47,6 +48,12 @@ class SaleService
                     $saveProducts = $this->productsTableRepository->save($productsTable);
                 }
             }
+            $table = $this->repository->find($productsTable->table);
+
+            if(isset($table)){
+                return true;
+            }
+
             if($saveProducts){
                 $user = Auth::user();
                 $request['products_table_id'] = $productsTable->table;
