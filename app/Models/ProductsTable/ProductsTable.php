@@ -17,6 +17,6 @@ class ProductsTable extends Model
      */
     public function product()
     {
-        return $this->hasMany(Product::class,'id','table');
+        return $this->hasMany(Product::class,'id','products_id');
     }
 }

@@ -33,17 +33,11 @@ class SaleRepository extends AbstractRepository
      */
     public function getAllByStatus($status)
     {
-//        return $this->getModel()
-//            ::with('user')
-//            ->with('products')
-//            ->where('status','=', $status)
-//            ->orderByDesc('id')
-//            ->get();
         return $this->getModel()
-            ::with([
-                'user',
-                'products'
-            ])
+            ::with('user')
+            ->with(['products' => function (HasMany $query) {
+                $query->with('product');
+            }])
             ->where('status','=', $status)
             ->orderByDesc('id')
             ->get();

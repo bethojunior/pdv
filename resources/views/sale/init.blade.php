@@ -44,18 +44,37 @@
             </tr>
         </thead>
         <tbody>
-        {{ $sales }}
+{{--        {{ $sales }}--}}
             @foreach($sales as $sale)
-                <tr>
+                <tr class="table" id="{{ $sale->id }}" products="{{ $sale->products }}">
                     <th>{{ $sale->table }}</th>
                     <td>{{ $sale->status }}</td>
                     <td>{{ $sale['user'][0]['name'] }}</td>
-                    <td>{{ $sale->table }}</td>
+                    <td><button data="{{ $sale }}" products="{{ $sale->products }}" id="{{ $sale->id }}" class="btn btn-info show-products">Ver itens</button></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
+    <div class="modal" tabindex="-1" id="modal-products">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Produtos</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @stop
 
