@@ -16,7 +16,7 @@
         @csrf
         <div class="form-group">
             <label>Nome da categoria</label>
-            <input name="name" placeholder="Nome da categoria" class="form-control">
+            <input required name="name" placeholder="Nome da categoria" class="form-control">
         </div>
         <div class="form-group">
             <input class="btn btn-success" type="submit" value="Salvar">

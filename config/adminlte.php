@@ -221,6 +221,11 @@ return [
             'icon'        => 'fas fa-fw fa-home',
         ],
         [
+            'text'        => 'Vendas',
+            'url'         => 'sales',
+            'icon'        => 'fas fa-fw fa-home',
+        ],
+        [
             'text'        => 'Usuários',
             'url'         => 'user',
             'icon'        => 'fas fa-fw fa-user',
@@ -300,7 +305,7 @@ return [
         ],
         [
             'name' => 'Select2',
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

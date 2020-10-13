@@ -16,6 +16,13 @@ Route::group(['prefix' => 'home'], function () {
     });
 });
 
+Route::group(['prefix' => 'sales'], function () {
+    Route::group(['as' => 'sales'], function () {
+        Route::get('', 'Sale\SaleController@index')->name('.index');
+        Route::post('create', 'Sale\SaleController@create')->name('.create');
+    });
+});
+
 Route::group(['prefix' => 'user'], function () {
     Route::group(['as' => 'user'], function () {
         Route::get('', 'User\UserController@index')->name('.list');

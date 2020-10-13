@@ -63,15 +63,15 @@
 
                         <div class="form-group">
                             <label>Nome do produto</label>
-                            <input class="form-control" name="name">
+                            <input required class="form-control" name="name">
                         </div>
                         <div class="form-group">
                             <label>Descrição do produto</label>
-                            <input class="form-control" name="description">
+                            <input required class="form-control" name="description">
                         </div>
                         <div class="form-group">
                             <label for="productType">Tipo do produto</label>
-                            <select name="product_types_id" class="form-control" id="productType">
+                            <select required name="product_types_id" class="form-control" id="productType">
                                 @foreach($productTypes as $type)
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
@@ -79,7 +79,7 @@
                         </div>
                         <div class="form-group">
                             <label>Valor do produto</label>
-                            <input id="value-product" class="form-control" name="value">
+                            <input required id="value-product" class="form-control" name="value">
                         </div>
                 </div>
                 <div class="modal-footer">
