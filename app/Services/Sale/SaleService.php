@@ -41,6 +41,7 @@ class SaleService
 
             $table = $this->repository->find($request['table']);
 
+
             if(isset($table)){
                 if($table->status == SaleConstants::CLOSED){
                     $that = $this->repository->find($table->id);
@@ -50,7 +51,7 @@ class SaleService
                             $productsTable = new ProductsTable([
                                 'products_id' => $product,
                                 'table' => $request['table'],
-                                'status' => 'open'
+                                'status' => SaleConstants::OPEN
                             ]);
                             $saveProducts = $this->productsTableRepository->save($productsTable);
                         }
@@ -70,7 +71,7 @@ class SaleService
                         $productsTable = new ProductsTable([
                             'products_id' => $product,
                             'table' => $request['table'],
-                            'status' => 'open'
+                            'status' => SaleConstants::OPEN
                         ]);
                         $saveProducts = $this->productsTableRepository->save($productsTable);
                     }
@@ -83,18 +84,27 @@ class SaleService
                         $productsTable = new ProductsTable([
                             'products_id' => $product,
                             'table' => $request['table'],
-                            'status' => 'open'
+                            'status' => SaleConstants::OPEN
                         ]);
                         $saveProducts = $this->productsTableRepository->save($productsTable);
                     }
+
+                    $that = $this->productsTableRepository->find($productsTable->id);
+
+                    $user = Auth::user();
+
+                    $data = [
+                        'products_table_id' => $that->table,
+                        'status' => SaleConstants::OPEN,
+                        'user_id' => $user->id,
+                        'table'   => $request['table']
+                    ];
+
+                    $sale = new Sale($data);
+
+                    $this->repository->save($sale);
                 }
 
-                $user = Auth::user();
-                $request['products_table_id'] = $productsTable->table;
-                $request['status'] = 'open';
-                $request['user_id'] = $user->id;
-                $sale = new Sale($request);
-                $this->repository->save($sale);
             }
 
 

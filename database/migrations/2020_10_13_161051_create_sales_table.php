@@ -21,10 +21,11 @@ class CreateSalesTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
-            $table->unsignedInteger('products_table_id')->nullable();
-            $table->foreign('products_table_id')
-                ->references('id')
-                ->on('products_table');
+            $table->integer('products_table_id');
+//            $table->unsignedInteger('products_table_id')->nullable();
+//            $table->foreign('products_table_id')
+//                ->references('id')
+//                ->on('products_table');
             $table->timestamps();
         });
     }
