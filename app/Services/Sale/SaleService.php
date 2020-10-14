@@ -63,28 +63,40 @@ class SaleService
                         $sale = new Sale($request);
                         $this->repository->save($sale);
                     }
+                    return true;
                 }
-                return true;
-            }
 
-            if(isset($products)){
-                foreach ($products as $product){
-                    $productsTable = new ProductsTable([
-                        'products_id' => $product,
-                        'table' => $request['table'],
-                        'status' => 'open'
-                    ]);
-                    $saveProducts = $this->productsTableRepository->save($productsTable);
+                if($table->status == SaleConstants::OPEN){
+                    foreach ($products as $product){
+                        $productsTable = new ProductsTable([
+                            'products_id' => $product,
+                            'table' => $request['table'],
+                            'status' => 'open'
+                        ]);
+                        $saveProducts = $this->productsTableRepository->save($productsTable);
+                    }
                 }
+
+            }else{
+                /** Cria mesa nova **/
+                if(isset($products)){
+                    foreach ($products as $product){
+                        $productsTable = new ProductsTable([
+                            'products_id' => $product,
+                            'table' => $request['table'],
+                            'status' => 'open'
+                        ]);
+                        $saveProducts = $this->productsTableRepository->save($productsTable);
+                    }
+                }
+
+                $user = Auth::user();
+                $request['products_table_id'] = $productsTable->table;
+                $request['status'] = 'open';
+                $request['user_id'] = $user->id;
+                $sale = new Sale($request);
+                $this->repository->save($sale);
             }
-
-            $user = Auth::user();
-            $request['products_table_id'] = $productsTable->table;
-            $request['status'] = 'open';
-            $request['user_id'] = $user->id;
-            $sale = new Sale($request);
-            $this->repository->save($sale);
-
 
 
         }catch (\Exception $exception){
