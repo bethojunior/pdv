@@ -61,9 +61,8 @@ class SaleService
                         $request['status'] = 'open';
                         $request['user_id'] = $user->id;
                         $sale = new Sale($request);
-                        $this->repository->save($sale);
+                        $this->repository->update($sale);
                     }
-                    return true;
                 }
 
                 if($table->status == SaleConstants::OPEN){
@@ -76,9 +75,9 @@ class SaleService
                         $saveProducts = $this->productsTableRepository->save($productsTable);
                     }
                 }
+            }
 
-            }else{
-                /** Cria mesa nova **/
+            if(!isset($table)){
                 if(isset($products)){
                     foreach ($products as $product){
                         $productsTable = new ProductsTable([
@@ -97,6 +96,7 @@ class SaleService
                 $sale = new Sale($request);
                 $this->repository->save($sale);
             }
+
 
 
         }catch (\Exception $exception){
