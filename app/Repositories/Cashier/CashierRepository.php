@@ -21,7 +21,13 @@ class CashierRepository extends AbstractRepository
     {
         return $this->getModel()
             ::with('user')
-            ->with('products')
             ->get();
+    }
+
+    /**
+     * @return int|mixed
+     */
+    public function valueToday()
+    {
     }
 }

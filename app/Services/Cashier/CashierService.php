@@ -33,6 +33,14 @@ class CashierService
     }
 
     /**
+     * @return int|mixed
+     */
+    public function valueToday()
+    {
+        return $this->repository->valueToday();
+    }
+
+    /**
      * @param array $request
      * @return Cashier
      */

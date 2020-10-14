@@ -27,7 +27,9 @@ class CashierController extends Controller
     {
         $today = $this->service
             ->today();
-        return view('cashier.index')->with(['today' => $today]);
+        $valueToday = $this->service
+            ->valueToday();
+        return view('cashier.index')->with(['today' => $today,'total' => $valueToday]);
     }
 
 
