@@ -4,6 +4,7 @@
 namespace App\Repositories\Sale;
 
 
+use App\Constants\SaleConstants;
 use App\Contracts\Repository\AbstractRepository;
 use App\Models\Sale\Sale;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -36,7 +37,7 @@ class SaleRepository extends AbstractRepository
         return $this->getModel()
             ::with('user')
             ->with(['products' => function (HasMany $query) {
-                $query->with('product');
+                $query->with('product')->where('status','=',SaleConstants::OPEN);
             }])
             ->where('status','=', $status)
             ->orderByDesc('id')

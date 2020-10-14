@@ -4,6 +4,7 @@
 namespace App\Repositories\ProductsTable;
 
 
+use App\Constants\SaleConstants;
 use App\Contracts\Repository\AbstractRepository;
 use App\Models\ProductsTable\ProductsTable;
 
@@ -23,6 +24,7 @@ class ProductsTableRepository extends AbstractRepository
     {
         return $this->getModel()
             ::where('table','=',$table)
+            ->where('status','=',SaleConstants::OPEN)
             ->get();
     }
 

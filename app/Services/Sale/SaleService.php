@@ -39,22 +39,22 @@ class SaleService
         try{
             $products = isset($request['product_id']) ? $request['product_id'] : null;
 
-            if(isset($products)){
-                foreach ($products as $product){
-                    $productsTable = new ProductsTable([
-                        'products_id' => $product,
-                        'table' => $request['table'],
-                        'status' => 'open'
-                    ]);
-                    $saveProducts = $this->productsTableRepository->save($productsTable);
-                }
-            }
-            $table = $this->repository->find($productsTable->table);
+            $table = $this->repository->find($request['table']);
 
             if(isset($table)){
                 if($table->status == SaleConstants::CLOSED){
                     $that = $this->repository->find($table->id);
                     $that->update(['status' => SaleConstants::OPEN]);
+                    if(isset($products)){
+                        foreach ($products as $product){
+                            $productsTable = new ProductsTable([
+                                'products_id' => $product,
+                                'table' => $request['table'],
+                                'status' => 'open'
+                            ]);
+                            $saveProducts = $this->productsTableRepository->save($productsTable);
+                        }
+                    }
                     if($saveProducts){
                         $user = Auth::user();
                         $request['products_table_id'] = $productsTable->table;
@@ -67,14 +67,23 @@ class SaleService
                 return true;
             }
 
+            if(isset($products)){
+                foreach ($products as $product){
+                    $productsTable = new ProductsTable([
+                        'products_id' => $product,
+                        'table' => $request['table'],
+                        'status' => 'open'
+                    ]);
+                    $saveProducts = $this->productsTableRepository->save($productsTable);
+                }
+            }
+
             $user = Auth::user();
             $request['products_table_id'] = $productsTable->table;
             $request['status'] = 'open';
             $request['user_id'] = $user->id;
             $sale = new Sale($request);
             $this->repository->save($sale);
-
-
 
 
 
@@ -99,7 +108,7 @@ class SaleService
      * @param string $status
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
      */
-    public function getAllByStatus($status = 'open')
+    public function getAllByStatus($status = SaleConstants::OPEN)
     {
         return $this->repository
             ->getAllByStatus($status);
