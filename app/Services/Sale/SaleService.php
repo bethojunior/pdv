@@ -4,6 +4,7 @@
 namespace App\Services\Sale;
 
 
+use App\Constants\SaleConstants;
 use App\Models\ProductsTable\ProductsTable;
 use App\Models\Sale\Sale;
 use App\Repositories\ProductsTable\ProductsTableRepository;
@@ -51,17 +52,30 @@ class SaleService
             $table = $this->repository->find($productsTable->table);
 
             if(isset($table)){
+                if($table->status == SaleConstants::CLOSED){
+                    $that = $this->repository->find($table->id);
+                    $that->update(['status' => SaleConstants::OPEN]);
+                    if($saveProducts){
+                        $user = Auth::user();
+                        $request['products_table_id'] = $productsTable->table;
+                        $request['status'] = 'open';
+                        $request['user_id'] = $user->id;
+                        $sale = new Sale($request);
+                        $this->repository->save($sale);
+                    }
+                }
                 return true;
             }
 
-            if($saveProducts){
-                $user = Auth::user();
-                $request['products_table_id'] = $productsTable->table;
-                $request['status'] = 'open';
-                $request['user_id'] = $user->id;
-                $sale = new Sale($request);
-                $this->repository->save($sale);
-            }
+            $user = Auth::user();
+            $request['products_table_id'] = $productsTable->table;
+            $request['status'] = 'open';
+            $request['user_id'] = $user->id;
+            $sale = new Sale($request);
+            $this->repository->save($sale);
+
+
+
 
 
         }catch (\Exception $exception){
@@ -69,7 +83,7 @@ class SaleService
             throw $exception;
         }
 
-        return $sale;
+        return true;
     }
 
     /***
@@ -91,5 +105,25 @@ class SaleService
             ->getAllByStatus($status);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
+     */
+    public function updateStatus($id)
+    {
+
+        $table = $this->repository->find($id);
+
+        $table->update(['status' => SaleConstants::CLOSED]);
+
+        $products = $this->productsTableRepository
+            ->getAllByTable($table->table);
+
+        foreach ($products as $product){
+            $product->update(['status' => SaleConstants::CLOSED]);
+        }
+
+        return $products;
+    }
 
 }

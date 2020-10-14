@@ -37,3 +37,24 @@ elementProperty.addEventInElement('.show-products','onclick',function () {
     })
 
 })
+
+elementProperty.addEventInElement('.closed-table','onclick',function () {
+    let id = this.getAttribute('id');
+    SwalCustom.dialogConfirm('Deseja finalizar mesa?','Vai encerrar e deixar a mesa aberta',status => {
+        if(!status)
+            return true;
+
+        SalesController.closed(id).then(response => {
+            console.log(response)
+            if(!response.status)
+                return swal('Erro ao fechar mesa','Contate o suporte 24 hrs','info')
+
+            elementProperty.getElement('.table'+id,table => {
+                table.style.display = 'none';
+            })
+
+            return swal('Mesa encerrada com sucesso','','success');
+        })
+    })
+
+});

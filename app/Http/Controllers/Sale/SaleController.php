@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Sale;
 
 use App\Http\Controllers\Controller;
+use App\Http\Responses\ApiResponse;
 use App\Models\Sale;
 use App\Services\Product\ProductService;
 use App\Services\Sale\SaleService;
@@ -62,46 +63,50 @@ class SaleController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\sale  $sale
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function show(sale $sale)
+    public function delete(Request $request)
+    {
+        $id = $request->all('table');
+        try{
+            $insert = $this->service
+                ->updateStatus($id);
+        }catch (\Exception $exception){
+            return redirect()->route('sales.index')
+                ->with('error', 'Erro ao encerrar mesa '.$exception->getMessage());
+        }
+        return redirect()->route('sales.index')
+            ->with('success', 'Mesa encerrada');
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateStatus($id)
+    {
+        try{
+            $insert = $this->service
+                ->updateStatus($id);
+        }catch (\Exception $exception){
+            return ApiResponse::error('Erro ao alterar status',$exception->getMessage());
+        }
+        return ApiResponse::success($insert,'Mesa fechada com sucesso');
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function update(Request $request)
     {
         //
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\sale  $sale
-     * @return \Illuminate\Http\Response
+     * @param $id
      */
-    public function edit(sale $sale)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\sale  $sale
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, sale $sale)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\sale  $sale
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(sale $sale)
+    public function destroy($id)
     {
         //
     }

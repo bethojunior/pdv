@@ -42,4 +42,29 @@ class SaleRepository extends AbstractRepository
             ->orderByDesc('id')
             ->get();
     }
+
+    /**
+     * @param $user
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
+     */
+    public function getAllByUser($user)
+    {
+        return $this->getModel()
+            ::with('user')
+            ->with(['products' => function (HasMany $query) {
+                $query->with('product');
+            }])
+            ->where('user_id','=', $user)
+            ->orderByDesc('id')
+            ->get();
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Model $id
+     * @return bool|void
+     */
+    public function updateTable($id)
+    {
+
+    }
 }

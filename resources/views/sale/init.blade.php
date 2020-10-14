@@ -42,17 +42,27 @@
                 <th scope="col">Atendente</th>
                 <th scope="col">Aberta</th>
                 <th scope="col">Produtos</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             @foreach($sales as $sale)
-                <tr class="table" id="{{ $sale->id }}" products="{{ $sale->products }}">
+                <tr class="table{{$sale->id}}" id="{{ $sale->id }}" products="{{ $sale->products }}">
                     <th>{{ $sale->table }}</th>
                     <td>{{ $sale['user'][0]['name'] }}</td>
                     <td>{{ \Carbon\Carbon::parse($sale->created_at)->format('d/m/Y - H:m:s')}}</td>
                     <td>
-                        <button data="{{ $sale }}" products="{{ $sale->products }}" id="{{ $sale->id }}" class="btn btn-info show-products">Ver itens</button>
+                        <button data="{{ $sale }}" products="{{ $sale->products }}" id="{{ $sale->id }}" class="btn btn-outline-info show-products">Ver itens</button>
+                        <button id="{{ $sale->id }}" class="btn btn-outline-danger closed-table">Encerrar mesa</button>
                     </td>
+{{--                    <form method="POST" action="{{route('sales.delete')}}">--}}
+{{--                        @csrf--}}
+{{--                        @method('DELETE')--}}
+{{--                        <button data="{{ $sale }}" products="{{ $sale->products }}" id="{{ $sale->id }}" class="btn btn-outline-info show-products">Ver itens</button>--}}
+{{--                        --}}{{--                            <button id="{{ $sale->id }}" class="btn btn-outline-danger closed-table">Encerrar mesa</button>--}}
+{{--                        <input class="hide" name="id" value="{{ $sale->id }}">--}}
+{{--                        <input class="btn btn-outline-danger" type="submit" value="Encerrar mesa">--}}
+{{--                    </form>--}}
                 </tr>
             @endforeach
         </tbody>
@@ -88,7 +98,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Finalizar</button>
+{{--                    <button type="button" class="btn btn-primary">Encerrar mesa</button>--}}
                 </div>
             </div>
         </div>
@@ -97,7 +107,7 @@
 @stop
 
 @section('js')
-    <script src="{{ asset('js/controllers/Product/ProductController.js') }}"></script>
+    <script src="{{ asset('js/controllers/Sale/SalesController.js') }}"></script>
     <script src="{{ asset('js/modules/sales/init.js') }}"></script>
 @endsection
 

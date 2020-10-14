@@ -24,12 +24,13 @@ Route::group(['prefix' => 'user'], function () {
 Route::group(['prefix' => 'product'], function () {
     Route::group(['as' => 'product'], function () {
         Route::delete('{id}', 'Product\ProductController@destroy')->name('.destroy');
+        Route::get('', 'Product\ProductController@indexApi');
     });
 });
 
 
-Route::group(['prefix' => 'products'], function () {
-    Route::group(['as' => 'products'], function () {
-        Route::get('', 'Product\ProductController@indexApi');
+Route::group(['prefix' => 'sale'], function () {
+    Route::group(['as' => 'sale'], function () {
+        Route::delete('{id}', 'Sale\SaleController@updateStatus');
     });
 });

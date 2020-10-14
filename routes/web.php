@@ -20,8 +20,10 @@ Route::group(['prefix' => 'sales'], function () {
     Route::group(['as' => 'sales'], function () {
         Route::get('', 'Sale\SaleController@index')->name('.index');
         Route::post('create', 'Sale\SaleController@create')->name('.create');
+        Route::delete('', 'Sale\SaleController@delete')->name('.delete');
     });
 });
+
 
 Route::group(['prefix' => 'user'], function () {
     Route::group(['as' => 'user'], function () {

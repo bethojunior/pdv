@@ -15,4 +15,27 @@ class ProductsTableRepository extends AbstractRepository
         $this->setModel(ProductsTable::class);
     }
 
+    /**
+     * @param $table
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
+     */
+    public function getAllByTable($table)
+    {
+        return $this->getModel()
+            ::where('table','=',$table)
+            ->get();
+    }
+
+    /**
+     * @param $table
+     * @return bool|mixed|null
+     * @throws \Exception
+     */
+    public function deleteByTable($table)
+    {
+        return $this->getModel()
+            ::where('table','=',$table)
+            ->delete();
+    }
+
 }
