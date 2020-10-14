@@ -53,16 +53,16 @@
                     <td>{{ \Carbon\Carbon::parse($sale->created_at)->format('d/m/Y - H:m:s')}}</td>
                     <td>
                         <button data="{{ $sale }}" products="{{ $sale->products }}" id="{{ $sale->id }}" class="btn btn-outline-info show-products">Ver itens</button>
-                        <button id="{{ $sale->id }}" class="btn btn-outline-danger closed-table">Encerrar mesa</button>
                     </td>
-{{--                    <form method="POST" action="{{route('sales.delete')}}">--}}
-{{--                        @csrf--}}
-{{--                        @method('DELETE')--}}
-{{--                        <button data="{{ $sale }}" products="{{ $sale->products }}" id="{{ $sale->id }}" class="btn btn-outline-info show-products">Ver itens</button>--}}
-{{--                        --}}{{--                            <button id="{{ $sale->id }}" class="btn btn-outline-danger closed-table">Encerrar mesa</button>--}}
-{{--                        <input class="hide" name="id" value="{{ $sale->id }}">--}}
-{{--                        <input class="btn btn-outline-danger" type="submit" value="Encerrar mesa">--}}
-{{--                    </form>--}}
+{{--                    <td>--}}
+{{--                        <form method="POST" action="{{route('sales.delete')}}">--}}
+{{--                            @csrf--}}
+{{--                            @method('DELETE')--}}
+{{--                            <button data="{{ $sale }}" products="{{ $sale->products }}" id="{{ $sale->id }}" type="button" class="btn btn-outline-info show-products">Ver itens</button>--}}
+{{--                            <input class="hide" name="id" value="{{ $sale->id }}">--}}
+{{--                            <input class="btn btn-outline-danger" type="submit" value="Encerrar mesa">--}}
+{{--                        </form>--}}
+{{--                    </td>--}}
                 </tr>
             @endforeach
         </tbody>
@@ -98,7 +98,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-{{--                    <button type="button" class="btn btn-primary">Encerrar mesa</button>--}}
+                    <button class="btn btn-outline-danger closed-table">Encerrar mesa</button>
                 </div>
             </div>
         </div>

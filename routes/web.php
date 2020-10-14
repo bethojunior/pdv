@@ -46,4 +46,10 @@ Route::group(['prefix' => 'typeProduct'], function () {
     });
 });
 
+Route::group(['prefix' => 'cashier'], function () {
+    Route::group(['as' => 'cashier'], function () {
+        Route::get('', 'Cashier\CashierController@index')->name('.index');
+    });
+});
+
 

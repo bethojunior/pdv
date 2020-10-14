@@ -2,16 +2,21 @@ $(document).ready(function() {
     $('.js-example-basic-multiple').select2();
 });
 
+let totalValue = 0;
+let tableSelected;
+
 elementProperty.addEventInElement('.show-products','onclick',function () {
-    let totalValue = 0;
+
     elementProperty.getElement('#mount-products-by-table',these => {
         these.innerHTML = '';
     })
-
+    let data = JSON.parse(this.getAttribute('data'));
+    tableSelected = data;
     let products = JSON.parse(this.getAttribute('products'));
 
     $('#modal-products').modal('show');
 
+    console.log(data)
     elementProperty.getElement('#mount-products-by-table',these => {
         these.innerHTML = '';
         products.map(item => {
@@ -21,7 +26,6 @@ elementProperty.addEventInElement('.show-products','onclick',function () {
             let data = item.product;
             these.innerHTML += data.map(item => {
                 totalValue = (totalValue + item.value);
-                console.log(item.value)
                 return `
                     <tr>
                         <th>${item.name}</th>
@@ -39,17 +43,28 @@ elementProperty.addEventInElement('.show-products','onclick',function () {
 })
 
 elementProperty.addEventInElement('.closed-table','onclick',function () {
-    let id = this.getAttribute('id');
+
+    $('#modal-products').modal('hide');
+    let value = Mask.maskMoney(totalValue);
+    value = Mask.removeMaskMoney(value);
+    let formData = new FormData();
+    formData.append('id' , tableSelected.id);
+    formData.append('value' , value);
+    formData.append('user' , tableSelected.user_id);
+    formData.append('date' , tableSelected.updated_at);
+    formData.append('table' , tableSelected.table);
+    formData.append('products' , JSON.stringify(tableSelected.products));
     SwalCustom.dialogConfirm('Deseja finalizar mesa?','Vai encerrar e deixar a mesa aberta',status => {
+
         if(!status)
             return true;
 
-        SalesController.closed(id).then(response => {
+        SalesController.closed(formData).then(response => {
             console.log(response)
             if(!response.status)
                 return swal('Erro ao fechar mesa','Contate o suporte 24 hrs','info')
 
-            elementProperty.getElement('.table'+id,table => {
+            elementProperty.getElement('.table'+tableSelected.id,table => {
                 table.style.display = 'none';
             })
 
@@ -58,3 +73,5 @@ elementProperty.addEventInElement('.closed-table','onclick',function () {
     })
 
 });
+
+

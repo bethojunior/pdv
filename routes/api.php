@@ -31,6 +31,6 @@ Route::group(['prefix' => 'product'], function () {
 
 Route::group(['prefix' => 'sale'], function () {
     Route::group(['as' => 'sale'], function () {
-        Route::delete('{id}', 'Sale\SaleController@updateStatus');
+        Route::post('', 'Sale\SaleController@updateStatus');
     });
 });

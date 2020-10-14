@@ -23,7 +23,9 @@ class SaleRepository extends AbstractRepository
     {
         return $this->getModel()
             ::with('user')
-            ->with('product')
+            ->with(['products' => function (HasMany $query) {
+                $query->with('product');
+            }])
             ->orderByDesc('id')
             ->get();
     }

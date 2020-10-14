@@ -84,11 +84,11 @@ class SaleController extends Controller
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function updateStatus($id)
+    public function updateStatus(Request $request)
     {
         try{
             $insert = $this->service
-                ->updateStatus($id);
+                ->updateStatus($request->all());
         }catch (\Exception $exception){
             return ApiResponse::error('Erro ao alterar status',$exception->getMessage());
         }

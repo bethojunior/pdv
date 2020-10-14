@@ -9,6 +9,7 @@ use App\Models\ProductsTable\ProductsTable;
 use App\Models\Sale\Sale;
 use App\Repositories\ProductsTable\ProductsTableRepository;
 use App\Repositories\Sale\SaleRepository;
+use App\Services\Cashier\CashierService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -17,15 +18,18 @@ class SaleService
 
     private $repository;
     private $productsTableRepository;
+    private $cashierService;
 
     /**
      * SaleService constructor.
      * @param SaleRepository $saleRepository
      * @param ProductsTableRepository $productsTableRepository
+     * @param CashierService $cashierService
      */
-    public function __construct(SaleRepository $saleRepository , ProductsTableRepository $productsTableRepository)
+    public function __construct(SaleRepository $saleRepository , ProductsTableRepository $productsTableRepository, CashierService $cashierService)
     {
         $this->repository = $saleRepository;
+        $this->cashierService = $cashierService;
         $this->productsTableRepository = $productsTableRepository;
     }
 
@@ -140,10 +144,13 @@ class SaleService
      * @param $id
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
      */
-    public function updateStatus($id)
+    public function updateStatus($request)
     {
-
+        $id = $request['id'];
         $table = $this->repository->find($id);
+
+        $this->cashierService
+            ->create($request);
 
         $table->update(['status' => SaleConstants::CLOSED]);
 

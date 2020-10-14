@@ -1,9 +1,9 @@
 class SalesController extends ConnectionServer{
 
-    static closed(id)
+    static closed(data)
     {
         return new Promise(resolve => {
-            this.sendRequest('sale/'+id,'DELETE',null,resolve,true);
+            this.sendRequest('sale','POST',data,resolve,true);
         })
     }
 }

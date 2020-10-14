@@ -216,8 +216,8 @@ return [
             'topnav' => true,
         ],
         [
-            'text'        => 'Dashboard',
-            'url'         => 'home',
+            'text'        => 'Caixa',
+            'url'         => 'cashier',
             'icon'        => 'fas fa-fw fa-home',
         ],
         [
