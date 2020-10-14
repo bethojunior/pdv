@@ -29,7 +29,7 @@ class CashierService
      */
     public function today()
     {
-        return $this->today();
+        return $this->repository->today();
     }
 
     /**

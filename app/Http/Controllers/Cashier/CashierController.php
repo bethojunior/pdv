@@ -25,9 +25,9 @@ class CashierController extends Controller
      */
     public function index()
     {
-//        $today = $this->service
-//            ->today();
-        return view('cashier.index');
+        $today = $this->service
+            ->today();
+        return view('cashier.index')->with(['today' => $today]);
     }
 
 
