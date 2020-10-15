@@ -44,6 +44,7 @@ class CashierRepository extends AbstractRepository
     {
         return $this->getModel()
             ::with('user')
+            ->with('products')
 
             ->when(isset($data['start']), function (Builder $query) use($data){
                 $query->whereBetween('created_at',array($data['start'],$data['end']));
@@ -52,6 +53,7 @@ class CashierRepository extends AbstractRepository
             ->when(isset($data['user']), function (Builder $query) use($data){
                 $query->where('user_id','=',$data['user']);
             })
+
 
             ->get();
     }

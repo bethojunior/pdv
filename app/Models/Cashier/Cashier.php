@@ -4,6 +4,7 @@
 namespace App\Models\Cashier;
 
 
+use App\Models\ProductsCashier\ProductsCashier;
 use App\Models\ProductsTable\ProductsTable;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -26,7 +27,7 @@ class Cashier extends Model
      */
     public function products()
     {
-        return $this->hasMany(ProductsTable::class,'table','products_table_id');
+        return $this->hasMany(ProductsCashier::class,'table','products_table_id');
     }
 
 
