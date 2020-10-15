@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductsCashier extends Model
 {
-    protected $table = 'products_cashiers';
+    protected $table = 'products_cashier';
     protected $fillable = ['product_id','sale_id'];
 
 
