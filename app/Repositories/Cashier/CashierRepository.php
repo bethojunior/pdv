@@ -24,6 +24,7 @@ class CashierRepository extends AbstractRepository
     {
         return $this->getModel()
             ::with('user')
+            ->with('products')
             ->whereDate('created_at','=',Carbon::now())
             ->get();
     }
