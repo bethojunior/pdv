@@ -55,7 +55,6 @@ class CashierRepository extends AbstractRepository
                 $query->where('user_id','=',$data['user']);
             })
 
-
             ->get();
     }
 
