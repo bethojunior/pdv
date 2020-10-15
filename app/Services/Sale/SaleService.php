@@ -44,9 +44,9 @@ class SaleService
             $products = isset($request['product_id']) ? $request['product_id'] : null;
 
             $table = $this->repository->find($request['table']);
-
+            $isTable = isset($table);
             /** Se a mesa existe, verifica o status  **/
-            if(isset($table)){
+            if(isset($table) || $isTable === false){
                 if($table->status === SaleConstants::CLOSED){
                     /** Reabrindo mesa **/
                     $that = $this->repository->find($table->id);
@@ -83,7 +83,7 @@ class SaleService
                         ]);
                         $saveProducts = $this->productsTableRepository->save($productsTable);
                     }
-                    return true;
+                    return false;
                 }
             }
 
