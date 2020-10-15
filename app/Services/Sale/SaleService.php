@@ -45,8 +45,10 @@ class SaleService
 
             $table = $this->repository->find($request['table']);
 
+            /** Se a mesa existe, verifica o status  **/
             if(isset($table)){
-                if($table->status == SaleConstants::CLOSED){
+                if($table->status === SaleConstants::CLOSED){
+                    /** Reabrindo mesa **/
                     $that = $this->repository->find($table->id);
                     $that->update(['status' => SaleConstants::OPEN]);
                     if(isset($products)){
@@ -70,7 +72,9 @@ class SaleService
                     return true;
                 }
 
-                if($table->status == SaleConstants::OPEN){
+                /** Verifica se mesa está aberta */
+                if($table->status === SaleConstants::OPEN){
+                    /** Adcionando produtos a mesa já aberta **/
                     foreach ($products as $product){
                         $productsTable = new ProductsTable([
                             'products_id' => $product,
@@ -83,6 +87,9 @@ class SaleService
                 }
             }
 
+            /**
+             * Criando nova mesa
+             */
             if(!isset($table)){
                 if(isset($products)){
                     foreach ($products as $product){
@@ -110,11 +117,8 @@ class SaleService
             }
 
         }catch (\Exception $exception){
-            DB::rollBack();
             throw $exception;
         }
-
-        return true;
     }
 
     /***

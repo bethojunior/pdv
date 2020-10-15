@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Sale;
 
+use App\Constants\SaleConstants;
 use App\Http\Controllers\Controller;
 use App\Http\Responses\ApiResponse;
 use App\Models\Sale;
@@ -29,7 +30,7 @@ class SaleController extends Controller
     public function index(ProductService $productService)
     {
         $salesOpen = $this->service
-            ->getAllByStatus();
+            ->getAllByStatus(SaleConstants::OPEN);
         $products = $productService->getAll();
         return view('sale.init')
             ->with(['sales' => $salesOpen,'products' => $products]);
@@ -60,24 +61,6 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function delete(Request $request)
-    {
-        $id = $request->all('table');
-        try{
-            $insert = $this->service
-                ->updateStatus($id);
-        }catch (\Exception $exception){
-            return redirect()->route('sales.index')
-                ->with('error', 'Erro ao encerrar mesa '.$exception->getMessage());
-        }
-        return redirect()->route('sales.index')
-            ->with('success', 'Mesa encerrada');
     }
 
     /**

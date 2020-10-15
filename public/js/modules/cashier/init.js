@@ -11,12 +11,12 @@ elementProperty.addEventInElement('.show-products','onclick',function () {
         tbody.innerHTML = content;
         data.map(item => {
             let products = item.product;
-            content += products.map(item => {
+            content += products.map(product => {
                 return `
                     <tr>
-                        <th>${item.name}</th>
-                        <td>${item.description}</td>
-                        <td>${Mask.maskMoney(item.value)}</td>
+                        <th>${product.name}</th>
+                        <td>${product.description}</td>
+                        <td>${Mask.maskMoney(product.value)}</td>
                     </tr>
                 `
             });

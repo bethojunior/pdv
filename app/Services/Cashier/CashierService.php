@@ -52,16 +52,17 @@ class CashierService
     public function create(array $request)
     {
 
-        $products = json_decode($request['products']);
+        $data = json_decode($request['products']);
+        foreach ($data as $products){
+            foreach ($products->product as $product){
+                $app = new ProductsCashier([
+                    'product_id' => $product->id,
+                    'sale_id'    => $request['table']
+                ]);
+                $this->productsCashierRepository->save($app);
+            }
 
-        foreach ($products as $product){
-            $app = new ProductsCashier([
-                'product_id' => $product->id,
-                'sale_id'    => $request['table']
-            ]);
-            $this->productsCashierRepository->save($app);
         }
-
 
         $data = [
             'user_id' => $request['user'],
