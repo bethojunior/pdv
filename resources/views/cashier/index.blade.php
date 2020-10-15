@@ -53,6 +53,8 @@
         </tr>
         </thead>
         <tbody>
+
+        {{$today}}
             @foreach($today as $value)
                 <tr>
                     <th>{{ $value->table }}</th>
