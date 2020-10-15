@@ -16,6 +16,7 @@ class ProductsCashier extends Migration
         Schema::create('products_cashier', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
+            $table->integer('sale_id');
             $table->timestamps();
         });
     }

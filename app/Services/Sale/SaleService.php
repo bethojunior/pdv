@@ -82,6 +82,7 @@ class SaleService
                 }
             }
 
+
             if(!isset($table)){
                 if(isset($products)){
                     foreach ($products as $product){
@@ -92,7 +93,6 @@ class SaleService
                         ]);
                         $saveProducts = $this->productsTableRepository->save($productsTable);
                     }
-
                     $that = $this->productsTableRepository->find($productsTable->id);
 
                     $user = Auth::user();

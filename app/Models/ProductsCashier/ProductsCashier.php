@@ -8,14 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductsCashier extends Model
 {
-    protected $fillable = ['product_id'];
+    protected $fillable = ['product_id','sale_id'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function type()
-    {
-        return $this->hasMany(Product::class,'id','product_id');
-    }
 
 }

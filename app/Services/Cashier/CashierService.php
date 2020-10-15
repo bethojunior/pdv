@@ -5,23 +5,28 @@ namespace App\Services\Cashier;
 
 
 use App\Models\Cashier\Cashier;
+use App\Models\ProductsCashier\ProductsCashier;
 use App\Repositories\Cashier\CashierRepository;
+use App\Repositories\ProductsCashier\ProductsCashierRepository;
 use App\Repositories\Sale\SaleRepository;
 
 class CashierService
 {
     private $repository;
     private $saleRepository;
+    private $productsCashierRepository;
 
     /**
      * CashierService constructor.
      * @param CashierRepository $cashierRepository
      * @param SaleRepository $saleRepository
+     * @param ProductsCashierRepository $productsCashierRepository
      */
-    public function __construct(CashierRepository $cashierRepository, SaleRepository $saleRepository)
+    public function __construct(CashierRepository $cashierRepository, SaleRepository $saleRepository, ProductsCashierRepository $productsCashierRepository)
     {
         $this->repository = $cashierRepository;
         $this->saleRepository = $saleRepository;
+        $this->productsCashierRepository = $productsCashierRepository;
     }
 
     /**
@@ -46,6 +51,19 @@ class CashierService
      */
     public function create(array $request)
     {
+
+//        dd($request);
+        $products = json_decode($request['products']);
+
+        foreach ($products as $product){
+            $app = new ProductsCashier([
+                'product_id' => $product->id,
+                'sale_id'    => $request['table']
+            ]);
+            $this->productsCashierRepository->save($app);
+        }
+
+
         $data = [
             'user_id' => $request['user'],
             'value'   => $request['value'],
