@@ -45,7 +45,6 @@ class SaleService
 
             $table = $this->repository->find($request['table']);
 
-
             if(isset($table)){
                 if($table->status == SaleConstants::CLOSED){
                     $that = $this->repository->find($table->id);
@@ -68,6 +67,7 @@ class SaleService
                         $sale = new Sale($request);
                         $this->repository->update($sale);
                     }
+                    return true;
                 }
 
                 if($table->status == SaleConstants::OPEN){
@@ -79,9 +79,9 @@ class SaleService
                         ]);
                         $saveProducts = $this->productsTableRepository->save($productsTable);
                     }
+                    return true;
                 }
             }
-
 
             if(!isset($table)){
                 if(isset($products)){
@@ -94,7 +94,6 @@ class SaleService
                         $saveProducts = $this->productsTableRepository->save($productsTable);
                     }
                     $that = $this->productsTableRepository->find($productsTable->id);
-
                     $user = Auth::user();
 
                     $data = [
@@ -108,10 +107,7 @@ class SaleService
 
                     $this->repository->save($sale);
                 }
-
             }
-
-
 
         }catch (\Exception $exception){
             DB::rollBack();
