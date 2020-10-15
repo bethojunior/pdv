@@ -8,6 +8,7 @@ use App\Contracts\Repository\AbstractRepository;
 use App\Models\Cashier\Cashier;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 
 class CashierRepository extends AbstractRepository
@@ -24,7 +25,9 @@ class CashierRepository extends AbstractRepository
     {
         return $this->getModel()
             ::with('user')
-            ->with('products')
+            ->with(['products' => function (HasMany $query) {
+                $query->with('product');
+            }])
             ->whereDate('created_at','=',Carbon::now())
             ->get();
     }
@@ -45,7 +48,9 @@ class CashierRepository extends AbstractRepository
     {
         return $this->getModel()
             ::with('user')
-            ->with('products')
+            ->with(['products' => function (HasMany $query) {
+                $query->with('product');
+            }])
 
             ->when(isset($data['start']), function (Builder $query) use($data){
                 $query->whereBetween('created_at',array($data['start'],$data['end']));

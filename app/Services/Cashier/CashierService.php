@@ -52,7 +52,6 @@ class CashierService
     public function create(array $request)
     {
 
-//        dd($request);
         $products = json_decode($request['products']);
 
         foreach ($products as $product){

@@ -12,4 +12,12 @@ class ProductsCashier extends Model
     protected $fillable = ['product_id','sale_id'];
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function product()
+    {
+        return $this->hasMany(Product::class,'id','product_id');
+    }
+
 }

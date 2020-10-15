@@ -53,8 +53,6 @@
         </tr>
         </thead>
         <tbody>
-
-        {{$today}}
             @foreach($today as $value)
                 <tr>
                     <th>{{ $value->table }}</th>
@@ -62,12 +60,42 @@
                     <td>{{ $value['user'][0]['name'] }}</td>
                     <td>R$ {{ $value->value }}</td>
                     <td>
-                        <button class="btn btn-outline-info">Ver</button>
+                        <button data="{{$value->products}}"  class="btn btn-outline-info show-products">Ver</button>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    <div class="modal" tabindex="-1" id="modal-products">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Listagem de produtos</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Valor</th>
+                        </tr>
+                        </thead>
+                        <tbody id="mount-products">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('js')
