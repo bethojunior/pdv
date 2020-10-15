@@ -76,6 +76,7 @@ class UserService
     {
         try{
             DB::beginTransaction();
+            $request['password'] =  bcrypt($request['password']);
             $user = new User($request);
             $user->save();
             DB::commit();

@@ -10,6 +10,37 @@
 @stop
 
 @section('content')
+    @include('includes.alerts')
+    <div class="row col-lg-12 card header pt-2 pl-2">
+        <label>Filtro</label>
+
+        <form class="row col-lg-12" method="POST" action="{{route('cashier.filter')}}">
+            @csrf
+            <div class="form-group col-lg-2">
+                <span>De</span>
+                <input name="start" type="date" class="form-control">
+            </div>
+            <div class="form-group col-lg-2">
+                <span>Até</span>
+                <input name="end" type="date" class="form-control">
+            </div>
+            <div class="form-group col-lg-2">
+                <span>Usuários</span>
+                <select class="js-example-basic-single col-lg-12" name="user">
+                    <option value="">--</option>
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group col-lg-1">
+                <span>&nbsp;</span>
+                <input type="submit" class="form-control btn btn-info" value="Pesquisar">
+            </div>
+        </form>
+
+    </div>
+
     <table class="table table-striped">
         <thead>
         <tr>
@@ -38,6 +69,6 @@
 @stop
 
 @section('js')
-    <script src="{{ asset('js/modules/home/init.js') }}"></script>
+    <script src="{{ asset('js/modules/cashier/init.js') }}"></script>
 @endsection
 

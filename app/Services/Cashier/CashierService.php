@@ -57,6 +57,15 @@ class CashierService
 
     }
 
-
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function filter($data)
+    {
+        $data['start'] = \Carbon\Carbon::parse($data['start'])->format('Y/m/d');
+        $data['end'] = \Carbon\Carbon::parse($data['end'])->format('Y/m/d');
+        return $this->repository->filter($data);
+    }
 
 }
