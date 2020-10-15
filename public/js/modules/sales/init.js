@@ -6,7 +6,7 @@ let totalValue = 0;
 let tableSelected;
 
 elementProperty.addEventInElement('.show-products','onclick',function () {
-
+    totalValue = 0;
     elementProperty.getElement('#mount-products-by-table',these => {
         these.innerHTML = '';
     })
@@ -16,7 +16,6 @@ elementProperty.addEventInElement('.show-products','onclick',function () {
 
     $('#modal-products').modal('show');
 
-    console.log(data)
     elementProperty.getElement('#mount-products-by-table',these => {
         these.innerHTML = '';
         products.map(item => {
