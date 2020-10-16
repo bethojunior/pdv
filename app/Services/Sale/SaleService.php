@@ -46,7 +46,7 @@ class SaleService
             $table = $this->repository->find($request['table']);
             $isTable = isset($table);
             /** Se a mesa existe, verifica o status  **/
-            if(isset($table) || $isTable === false){
+            if(isset($table) || $isTable === true){
                 if($table->status === SaleConstants::CLOSED){
                     /** Reabrindo mesa **/
                     $that = $this->repository->find($table->id);

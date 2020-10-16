@@ -46,7 +46,7 @@ class SaleController extends Controller
                 ->insert($request->all());
         }catch (\Exception $exception){
             return redirect()->route('sales.index')
-                ->with('error', 'Erro ao inserir produto '.$exception->getMessage());
+                ->with('error', 'Erro ao inserir produto '. $exception->getMessage());
         }
         return redirect()->route('sales.index')
             ->with('success', 'Produto inserido com sucesso');
