@@ -73,8 +73,10 @@ abstract class AbstractRepository
      */
     public function find($id, $columns = ['*'])
     {
-        return $this->getModel()
-            ::find($id, $columns);
+        $model = $this->getModel();
+        $result = $model::find($id, $columns);
+
+        return $result;
     }
 
 

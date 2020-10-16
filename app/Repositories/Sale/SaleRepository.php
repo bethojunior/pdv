@@ -7,6 +7,8 @@ namespace App\Repositories\Sale;
 use App\Constants\SaleConstants;
 use App\Contracts\Repository\AbstractRepository;
 use App\Models\Sale\Sale;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SaleRepository extends AbstractRepository
@@ -69,5 +71,16 @@ class SaleRepository extends AbstractRepository
     public function updateTable($id)
     {
 
+    }
+
+    /**
+     * @param $id
+     * @param array $columns
+     * @return Builder|Builder[]|\Illuminate\Database\Eloquent\Collection|Model|null
+     */
+    public function find($id, $columns = ['*'])
+    {
+        $model = $this->getModel();
+        return $model::select($columns)->where('table', $id)->first();
     }
 }

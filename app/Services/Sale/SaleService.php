@@ -44,9 +44,9 @@ class SaleService
             $products = isset($request['product_id']) ? $request['product_id'] : null;
 
             $table = $this->repository->find($request['table']);
-            $isTable = isset($table);
+            $isTable = isset($table->table); // verifca se existe o atributo table da mesa, sem esse atributo qualquer retorno do find sempre será true
             /** Se a mesa existe, verifica o status  **/
-            if(isset($table) || $isTable === true){
+            if($isTable === true){
                 if($table->status === SaleConstants::CLOSED){
                     /** Reabrindo mesa **/
                     $that = $this->repository->find($table->id);
@@ -90,7 +90,7 @@ class SaleService
             /**
              * Criando nova mesa
              */
-            if(!isset($table)){
+            if($isTable === false){
                 if(isset($products)){
                     foreach ($products as $product){
                         $productsTable = new ProductsTable([
