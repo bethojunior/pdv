@@ -215,36 +215,7 @@ return [
             'search' => false,
             'topnav' => true,
         ],
-        [
-            'text'        => 'Caixa',
-            'url'         => 'cashier',
-            'icon'        => 'fas fa-fw fa-home',
-        ],
-        [
-            'text'        => 'Vendas',
-            'url'         => 'sales',
-            'icon'        => 'fas fa-fw fa-home',
-        ],
-        [
-            'text'        => 'Usuários',
-            'url'         => 'user',
-            'icon'        => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Produtos',
-            'submenu' => [
-                [
-                    'text' => 'Tipos de produtos',
-                    'url'  => 'typeProduct',
-                    'icon' => 'far fa-plus-square',
-                ],
-                [
-                    'text' => 'Produtos',
-                    'url'  => 'products',
-                    'icon' => 'fas fa-utensils',
-                ],
-            ]
-        ]
+
     ],
 
     /*

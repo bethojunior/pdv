@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Constants\UserConstant;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
@@ -23,98 +24,57 @@ class MountOptionsNavProvider extends ServiceProvider
     /**
      * @param Dispatcher $events
      */
-//    public function boot(Dispatcher $events , EnterpriseRepository $enterpriseRepository)
-//    {
-//        $events->listen(BuildingMenu::class, function (BuildingMenu $event) use ($enterpriseRepository) {
-//            $user = Auth::user();
-//            $count = $enterpriseRepository->countAllApps();
-//            if($user->enterprises_id == null){
-//                $event->menu->add(
-//                    [
-//                        'text' => 'blog',
-//                        'url' => 'admin/blog',
-//                        'can' => 'manage-blog',
-//                    ],
-//
-//                    [
-//                        'text' => 'Anotações',
-//                        'url' => '/notes'
-//                    ],
-//                    [
-//                        'text' => 'Configurações',
-//                        'submenu' => [
-//                            [
-//                                'text' => 'Categorias do Aplicativo',
-//                                'url' => '/api-types',
-//                                'icon' => 'fas fa-th-list',
-//                            ],
-//                            [
-//                                'text' => 'Modulos',
-//                                'url' => '/modules',
-//                                'icon' => 'fas fa-th-list',
-//                            ],
-//                            [
-//                                'text' => 'Usuários',
-//                                'url' => '/settings/user',
-//                                'icon' => 'far fa-user'
-//                            ],
-//                        ],
-//                    ],
-//                    [
-//                        'text' => 'Clientes',
-//                        'url' => '/enterprises',
-//                        'label' => $count,
-//                        'label_color' => 'success',
-//                    ],
-//                    [
-//                        'text' => 'Implementações',
-//                        'url' => '/implementation'
-//                    ],
-//                    [
-//                        'text' => 'Tickets',
-//                        'submenu' => [
-//                            [
-//                                'text' => 'Painel',
-//                                'url' => '/ticket/home',
-//                                'icon' => 'fas fa-id-card',
-//                            ],
-//                        ],
-//                    ],
-//                    [
-//                        'text' => 'Testes Internos',
-//                        'submenu' => [
-//                            [
-//                                'text' => 'Criar',
-//                                'url' => 'tests/create',
-//                                'icon' => 'fas fa-folder-plus',
-//                            ],
-//                            [
-//                                'text' => 'Listar',
-//                                'url' => 'tests/',
-//                                'icon' => 'fas fa-th-list',
-//                            ]
-//                        ],
-//                    ]
-//
-//                );
-//                return true;
-//            }
-//            $event->menu->add(
-//                [
-//                    [
-//                        'text' => 'Abrir ticket',
-//                        'url' => '/ticket/new',
-//                        'icon' => 'fas fa-id-card',
-//                    ],
-//                    [
-//                        'text' => 'Meus tickets',
-//                        'url' => '/ticket/my',
-//                        'icon' => 'fas fa-id-card',
-//                    ],
-//                ]
-//            );
-//
-//        });
-//
-//    }
+    public function boot(Dispatcher $events )
+    {
+        $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
+            $user = Auth::user();
+            if($user->user_type_id == UserConstant::ADMIN){
+                $event->menu->add(
+                    [
+                        'text'        => 'Caixa',
+                        'url'         => 'cashier',
+                        'icon'        => 'fas fa-fw fa-home',
+                    ],
+                    [
+                        'text'        => 'Vendas',
+                        'url'         => 'sales',
+                        'icon'        => 'fas fa-fw fa-home',
+                    ],
+                    [
+                        'text'        => 'Usuários',
+                        'url'         => 'user',
+                        'icon'        => 'fas fa-fw fa-user',
+                    ],
+                    [
+                        'text' => 'Produtos',
+                        'submenu' => [
+                            [
+                                'text' => 'Tipos de produtos',
+                                'url'  => 'typeProduct',
+                                'icon' => 'far fa-plus-square',
+                            ],
+                            [
+                                'text' => 'Produtos',
+                                'url'  => 'products',
+                                'icon' => 'fas fa-utensils',
+                            ],
+                        ]
+                    ]
+
+                );
+                return true;
+            }
+            $event->menu->add(
+                [
+                    [
+                        'text'        => 'Vendas',
+                        'url'         => 'sales',
+                        'icon'        => 'fas fa-fw fa-home',
+                    ],
+                ]
+            );
+
+        });
+
+    }
 }

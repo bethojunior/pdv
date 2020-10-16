@@ -83,4 +83,15 @@ class SaleRepository extends AbstractRepository
         $model = $this->getModel();
         return $model::select($columns)->where('table', $id)->first();
     }
+
+    /**
+     * @param $id
+     * @param string[] $columns
+     * @return Builder|Model|object|null
+     */
+    public function findTable($id, $columns = ['*'])
+    {
+        $model = $this->getModel();
+        return $model::select($columns)->where('id', $id)->first();
+    }
 }

@@ -141,14 +141,14 @@ class SaleService
     }
 
     /**
-     * @param $id
+     * @param array $request
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
      */
-    public function updateStatus($request)
+    public function updateStatus(array $request)
     {
         $id = $request['id'];
-        $table = $this->repository->find($id);
-
+        $table = $this->repository->findTable($id);
+    
         $this->cashierService
             ->create($request);
 
