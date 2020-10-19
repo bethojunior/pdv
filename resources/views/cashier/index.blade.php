@@ -6,6 +6,7 @@
 @section('content_header')
     <h1 class="m-0 text-dark">
         Caixa
+        <span> Valor de Hoje R${{ $total->total }}</span>
     </h1>
 @stop
 

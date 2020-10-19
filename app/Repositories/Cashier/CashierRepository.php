@@ -33,11 +33,13 @@ class CashierRepository extends AbstractRepository
     }
 
     /**
-     * @return int|mixed
+     * @return Builder|\Illuminate\Database\Eloquent\Model|object|null
      */
     public function valueToday()
     {
-
+        return $this->getModel()
+            ::select(DB::raw("SUM(value) as total"))
+            ->first();
     }
 
     /**
@@ -48,6 +50,7 @@ class CashierRepository extends AbstractRepository
     {
         return $this->getModel()
             ::with('user')
+
             ->with(['products' => function (HasMany $query) {
                 $query->with('product');
             }])
@@ -59,6 +62,9 @@ class CashierRepository extends AbstractRepository
             ->when(isset($data['user']), function (Builder $query) use($data){
                 $query->where('user_id','=',$data['user']);
             })
+
+            ->select(DB::raw("SUM(value) as total"))
+
 
             ->get();
     }

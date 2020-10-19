@@ -38,7 +38,7 @@ class CashierService
     }
 
     /**
-     * @return int|mixed
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
      */
     public function valueToday()
     {

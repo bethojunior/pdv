@@ -148,7 +148,7 @@ class SaleService
     {
         $id = $request['id'];
         $table = $this->repository->findTable($id);
-    
+
         $this->cashierService
             ->create($request);
 
