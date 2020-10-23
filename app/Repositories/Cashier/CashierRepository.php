@@ -39,6 +39,7 @@ class CashierRepository extends AbstractRepository
     {
         return $this->getModel()
             ::select(DB::raw("SUM(value) as total"))
+            ->whereDate('created_at','=',Carbon::today())
             ->first();
     }
 

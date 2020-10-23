@@ -3,7 +3,6 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="msapplication-starturl" content="/">
-<link rel="stylesheet" href="https://loja704.com.br/css/dashboard/home.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
     function saveBeforeInstallPromptEvent(evt) {

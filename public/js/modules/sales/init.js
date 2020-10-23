@@ -42,7 +42,7 @@ elementProperty.addEventInElement('.show-products','onclick',function () {
 })
 
 elementProperty.addEventInElement('.closed-table','onclick',function () {
-
+    console.log()
     $('#modal-products').modal('hide');
     let value = Mask.maskMoney(totalValue);
     value = Mask.removeMaskMoney(value);

@@ -6,7 +6,12 @@
 @section('content_header')
     <h1 class="m-0 text-dark">
         Caixa
+        <br>
+        {{ \Carbon\Carbon::today()->format('d/m/Y') }}
+        <br>
         <span> Valor de Hoje R${{ $total->total }}</span>
+        <br>
+
     </h1>
 @stop
 
@@ -65,7 +70,18 @@
                     </td>
                 </tr>
             @endforeach
+            <tr>
+                <th></th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    R${{ $total->total }}
+                </td>
+            </tr>
         </tbody>
+
     </table>
 
     <div class="modal" tabindex="-1" id="modal-products">
@@ -78,21 +94,31 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped">
+                    <table id="table-for-print" class="table table-striped">
                         <thead>
                         <tr>
                             <th scope="col">Nome</th>
                             <th scope="col">Descrição</th>
                             <th scope="col">Valor</th>
+                            <th scope="col">Total</th>
                         </tr>
                         </thead>
                         <tbody id="mount-products">
 
                         </tbody>
+                        <tr>
+                            <th></th>
+                            <td></td>
+                            <td></td>
+                            <td id="value-total-sale">
+
+                            </td>
+                        </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-secondary" id="print-table">Imprimir</button>
                 </div>
             </div>
         </div>
