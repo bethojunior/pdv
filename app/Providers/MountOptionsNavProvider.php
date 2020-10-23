@@ -62,15 +62,12 @@ class MountOptionsNavProvider extends ServiceProvider
                     ]
 
                 );
-                return true;
             }
             $event->menu->add(
                 [
-                    [
-                        'text'        => 'Vendas',
-                        'url'         => 'sales',
-                        'icon'        => 'fas fa-fw fa-home',
-                    ],
+                    'text'        => 'Vendas',
+                    'url'         => 'sales',
+                    'icon'        => 'fas fa-fw fa-home',
                 ]
             );
 
