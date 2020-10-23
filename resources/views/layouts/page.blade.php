@@ -1,15 +1,17 @@
 @extends('adminlte::page')
-@laravelPWA
-<!-- Web Application Manifest -->
-<link rel="manifest" href="/manifest.json">
-<!-- Chrome for Android theme color -->
-<meta name="theme-color" content="#000000">
-
-<!-- Add to homescreen for Chrome on Android -->
+<link rel="manifest" href="{{ asset('manisfest.json') }}">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="application-name" content="PDV">
-<link rel="icon" sizes="512x512" href="{{ asset('assets/images/logo/logo.png') }}">
-
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="msapplication-starturl" content="/">
+<link rel="stylesheet" href="https://loja704.com.br/css/dashboard/home.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+    function saveBeforeInstallPromptEvent(evt) {
+        deferredInstallPrompt = evt;
+        deferredInstallPrompt.prompt();
+    }
+    window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
+</script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/default/config.css') }}">
 <link rel="stylesheet" href="{{ asset('config/main.css') }}">
@@ -32,17 +34,4 @@
 <script src="{{ asset('js/service/MainServices.js') }}"></script>
 <script src="{{ asset('js/utils/preloader.js') }}"></script>
 
-<script type="text/javascript">
-    // Initialize the service worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/serviceworker.js', {
-            scope: '.'
-        }).then(function (registration) {
-            // Registration was successful
-            console.log('Laravel PWA: ServiceWorker registration successful with scope: ', registration.scope);
-        }, function (err) {
-            // registration failed :(
-            console.log('Laravel PWA: ServiceWorker registration failed: ', err);
-        });
-    }
-</script>
+
