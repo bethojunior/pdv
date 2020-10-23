@@ -23,6 +23,7 @@
         "laravel/ui": "^2.0",
         "maknz/slack": "^1.7",
         "nesbot/carbon": "^2.33",
+        "silviolleite/laravelpwa": "^2.0",
         "spatie/laravel-permission": "^3.13",
         "wildbit/swiftmailer-postmark": "^3.1"
     },

@@ -129,6 +129,7 @@
       <path value="$PROJECT_DIR$/vendor/adminlte/auth" />
       <path value="$PROJECT_DIR$/vendor/adminlte/passwords" />
       <path value="$PROJECT_DIR$/vendor/adminlte/partials" />
+      <path value="$PROJECT_DIR$/vendor/silviolleite/laravelpwa" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
