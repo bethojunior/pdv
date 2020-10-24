@@ -118,7 +118,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-secondary" id="print-table">Imprimir</button>
+                    <button type="button" id='data-print' class="btn btn-info print">
+                        Imprimir
+                    </button>
                 </div>
             </div>
         </div>

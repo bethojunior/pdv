@@ -1,20 +1,23 @@
 $(document).ready(function() {
     $('.js-example-basic-single').select2();
 });
-
+let selected = []
 let totalValue = 0;
 
 elementProperty.addEventInElement('.show-products','onclick',function () {
+    selected = [];
     $('#modal-products').modal('show')
     totalValue = 0;
     let data = JSON.parse(this.getAttribute('data'));
 
     elementProperty.getElement('#mount-products', tbody => {
         let content = '';
-        tbody.innerHTML = content;
+        tbody.innerHTML = ' ';
         data.map(item => {
             let products = item.product;
+
             content += products.map(product => {
+                selected.push(product);
                 totalValue = totalValue + product.value;
                 return `
                     <tr>
@@ -30,15 +33,24 @@ elementProperty.addEventInElement('.show-products','onclick',function () {
         elementProperty.getElement('#value-total-sale' , total => {
             total.innerHTML = 'R$ '+Mask.maskMoney(totalValue);
         })
-        console.log(totalValue)
     })
+
 })
 
-elementProperty.addEventInElement('#print-table','onclick',function () {
-    var content_print = document.getElementById('table-for-print').innerHTML
-    screen_print = window.open('');
-
-    screen_print.document.write(content_print);
-    screen_print.window.print();
-    // screen_print.window.close();
+elementProperty.addEventInElement('#data-print' ,'onclick', that => {
+    selected.map(item => {
+        item.total = 'R$ '+Mask.maskMoney(totalValue);
+        item.value = 'R$ '+Mask.maskMoney(item.value)
+    });
+    printJS({
+        printable: selected,
+        properties: [
+            { field: 'name', displayName: 'Produto',columnSize : 4},
+            { field: 'description', displayName: 'Descrição',columnSize : 4},
+            { field: 'value', displayName: 'Valor',columnSize : 4}
+        ],
+        header: `<h3 class="custom-h3">Total R$ ${Mask.maskMoney(totalValue)}</h3>`,
+        style: '.custom-h3 { color: red; text-align:center }',
+        type: 'json'
+    })
 })

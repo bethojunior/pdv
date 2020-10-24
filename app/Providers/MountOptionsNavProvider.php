@@ -62,6 +62,7 @@ class MountOptionsNavProvider extends ServiceProvider
                     ]
 
                 );
+                return true;
             }
             $event->menu->add(
                 [

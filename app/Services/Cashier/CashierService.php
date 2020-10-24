@@ -61,9 +61,7 @@ class CashierService
                 ]);
                 $this->productsCashierRepository->save($app);
             }
-
         }
-
         $data = [
             'user_id' => $request['user'],
             'value'   => $request['value'],

@@ -28,7 +28,7 @@ class CashierRepository extends AbstractRepository
             ->with(['products' => function (HasMany $query) {
                 $query->with('product');
             }])
-            ->whereDate('created_at','=',Carbon::now())
+            ->whereDate('created_at','=',Carbon::today())
             ->get();
     }
 
