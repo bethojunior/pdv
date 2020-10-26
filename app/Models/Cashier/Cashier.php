@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cashier extends Model
 {
     protected $table = 'cashier';
-    protected $fillable = ['user_id','value','table'];
+    protected $fillable = ['user_id','value','table','sales_id'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

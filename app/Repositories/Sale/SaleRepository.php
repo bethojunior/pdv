@@ -89,6 +89,19 @@ class SaleRepository extends AbstractRepository
      * @param string[] $columns
      * @return Builder|Model|object|null
      */
+    public function findOpen($id, $columns = ['*'])
+    {
+        $model = $this->getModel();
+        return $model::select($columns)->where('table', $id)
+            ->where('status','=',SaleConstants::OPEN)
+            ->first();
+    }
+
+    /**
+     * @param $id
+     * @param string[] $columns
+     * @return Builder|Model|object|null
+     */
     public function findTable($id, $columns = ['*'])
     {
         $model = $this->getModel();

@@ -21,6 +21,7 @@ class AddCashier extends Migration
                 ->on('users');
             $table->float('value');
             $table->string('table');
+            $table->string('sales_id');
             $table->timestamps();
         });
     }
