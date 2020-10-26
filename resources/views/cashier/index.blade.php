@@ -59,6 +59,8 @@
         </tr>
         </thead>
         <tbody>
+{{--        {{ $today }}--}}
+
             @foreach($today as $value)
                 <tr>
                     <th>{{ $value->table }}</th>
@@ -66,7 +68,7 @@
                     <td>{{ $value['user'][0]['name'] }}</td>
                     <td>R$ {{ $value->value }}</td>
                     <td>
-                        <button data="{{$value->products}}"  class="btn btn-outline-info show-products">Ver</button>
+                        <button data="{{ $value }}" products="{{$value->products}}"  class="btn btn-outline-info show-products">Ver</button>
                     </td>
                 </tr>
             @endforeach

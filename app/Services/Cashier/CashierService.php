@@ -49,8 +49,9 @@ class CashierService
      * @param array $request
      * @return Cashier
      */
-    public function create(array $request)
+    public function create(array $request , $table)
     {
+        $sale = $this->saleRepository->findOpen($table->table);
 
         $data = json_decode($request['products']);
         foreach ($data as $products){
@@ -63,9 +64,10 @@ class CashierService
             }
         }
         $data = [
-            'user_id' => $request['user'],
-            'value'   => $request['value'],
-            'table'   => $request['table']
+            'user_id'  => $request['user'],
+            'value'    => $request['value'],
+            'table'    => $request['table'],
+            'sales_id' => $sale->id
         ];
         $cashier = new Cashier($data);
         $this->repository->save($cashier);
