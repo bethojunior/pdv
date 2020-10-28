@@ -77,7 +77,8 @@
                         <tr>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->description }}</td>
-                            <td>R$ {{ $product->value }}</td>
+{{--                            <td>R$ {{money_format('%n',$product->value) }}</td>--}}
+                            <td>R$ {{ number_format($product->value, 2, ',', '.') }} </td>
                         </tr>
                     @endforeach
                 </tbody>
