@@ -66,6 +66,15 @@ return [
                     "src" => "/images/icons/icon-72x72.png",
                     "purpose" => "any"
                 ]
+            ],
+            [
+                'name' => 'Vendedor',
+                'description' => 'Fazer login',
+                'url' => '/ogin',
+                'icons' => [
+                    "src" => "/images/icons/icon-72x72.png",
+                    "purpose" => "any"
+                ]
             ]
         ],
         'custom' => []
