@@ -4,13 +4,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="msapplication-starturl" content="/">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>
-    function saveBeforeInstallPromptEvent(evt) {
-        deferredInstallPrompt = evt;
-        deferredInstallPrompt.prompt();
-    }
-    window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
-</script>
+
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/default/config.css') }}">
 <link rel="stylesheet" href="{{ asset('config/main.css') }}">
