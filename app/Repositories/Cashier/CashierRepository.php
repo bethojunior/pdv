@@ -64,9 +64,6 @@ class CashierRepository extends AbstractRepository
                 $query->where('user_id','=',$data['user']);
             })
 
-            ->select(DB::raw("SUM(value) as total"))
-
-
             ->get();
     }
 
