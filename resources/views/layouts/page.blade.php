@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-<link rel="manifest" href="{{ asset('manisfest.json') }}">
+<link rel="manifest" href="{{ asset('manifestsales.json') }}">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="msapplication-starturl" content="/">
