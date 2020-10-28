@@ -43,31 +43,52 @@
             console.log('Laravel PWA: ServiceWorker registration failed: ', err);
         });
     }
+    $(document).ready(function(){
+        $('ul.tabs').tabs();
+    });
 </script>
 
 
 @laravelPWA
+
 <div style="display: flex;justify-content: center;align-items: center">
     <img style="width: 27vw" class="col l12 s12" src="{{ asset('assets/images/logo/logo.png') }}">
 </div>
-<table class="striped bordered">
-    <thead>
-    <tr>
-        <th>Nome</th>
-        <th>Descrição</th>
-        <th>Valor</th>
-    </tr>
-    </thead>
+<div class="row">
+    <div class="col s12">
+        <ul class="tabs">
+            @foreach($productsType as $types)
+                <li class="tab col s3"><a href="#{{ $types->id }}">{{ $types->name }}</a></li>
+            @endforeach
+        </ul>
+    </div>
+    @foreach($productsType as $types)
+        <div id="{{ $types->id }}" class="col s12">
+            <table class="striped bordered">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach($types->products as $product)
+                        <tr>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ $product->description }}</td>
+                            <td>R$ {{ $product->value }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
 
-    <tbody>
-        @foreach($products as $product)
-            <tr>
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->description }}</td>
-                <td>R$ {{ $product->value }}</td>
-            </tr>
-        @endforeach
-    </tbody>
+            </table>
+        </div>
+    @endforeach
 
-</table>
+</div>
+
+
+
+
 

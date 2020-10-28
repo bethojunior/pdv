@@ -26,6 +26,14 @@ class ProductTypeService
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
+     */
+    public function getAllWithProducts()
+    {
+        return $this->repository->getWithProducts()->sortDesc();
+    }
+
+    /**
      * @param array $request
      * @return ProductType
      */
