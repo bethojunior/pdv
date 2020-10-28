@@ -127,7 +127,7 @@ class SaleService
     public function getAll()
     {
         return $this->repository
-            ->getAll();
+            ->getAll()->sortByDesc();
     }
 
     /**

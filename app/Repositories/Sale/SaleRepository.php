@@ -28,7 +28,6 @@ class SaleRepository extends AbstractRepository
             ->with(['products' => function (HasMany $query) {
                 $query->with('product');
             }])
-            ->orderByDesc('id')
             ->get();
     }
 
