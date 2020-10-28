@@ -3,12 +3,15 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+Auth::routes();
 
-Route::get('/', function () {
+Route::get('/', 'Menu\MenuController@index');
+
+Route::get('/login', function () {
     return view('auth.login');
 });
 
-Auth::routes();
+
 
 Route::group(['prefix' => 'home'], function () {
     Route::group(['as' => 'home'], function () {
