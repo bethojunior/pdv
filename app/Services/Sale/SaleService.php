@@ -35,7 +35,7 @@ class SaleService
 
     /**
      * @param array $request
-     * @return Sale|bool
+     * @return bool
      * @throws \Exception
      */
     public function insert(array $request)
@@ -47,6 +47,31 @@ class SaleService
             $isTable = isset($table->table); // verifca se existe o atributo table da mesa, sem esse atributo qualquer retorno do find sempre será true
             /** Se a mesa existe, verifica o status  **/
             if($isTable === true){
+                if($table->status === SaleConstants::CLOSED){
+                    /** Reabrindo mesa **/
+                    $that = $this->repository->find($table->id);
+                    $that->update(['status' => SaleConstants::OPEN]);
+                    if(isset($products)){
+                        foreach ($products as $product){
+                            $productsTable = new ProductsTable([
+                                'products_id' => $product,
+                                'table' => $request['table'],
+                                'status' => SaleConstants::OPEN
+                            ]);
+                            $saveProducts = $this->productsTableRepository->save($productsTable);
+                        }
+                    }
+                    if($saveProducts){
+                        $user = Auth::user();
+                        $request['products_table_id'] = $productsTable->table;
+                        $request['status'] = 'open';
+                        $request['user_id'] = $user->id;
+                        $sale = new Sale($request);
+                        $this->repository->update($sale);
+                    }
+                    return true;
+                }
+
                 /** Verifica se mesa está aberta */
                 if($table->status === SaleConstants::OPEN){
                     /** Adcionando produtos a mesa já aberta **/
@@ -62,28 +87,33 @@ class SaleService
                 }
             }
 
-            if(isset($products)){
-                foreach ($products as $product){
-                    $productsTable = new ProductsTable([
-                        'products_id' => $product,
-                        'table' => $request['table'],
-                        'status' => SaleConstants::OPEN
-                    ]);
-                    $saveProducts = $this->productsTableRepository->save($productsTable);
+            /**
+             * Criando nova mesa
+             */
+            if($isTable === false){
+                if(isset($products)){
+                    foreach ($products as $product){
+                        $productsTable = new ProductsTable([
+                            'products_id' => $product,
+                            'table' => $request['table'],
+                            'status' => SaleConstants::OPEN
+                        ]);
+                        $saveProducts = $this->productsTableRepository->save($productsTable);
+                    }
+                    $that = $this->productsTableRepository->find($productsTable->id);
+                    $user = Auth::user();
+
+                    $data = [
+                        'products_table_id' => $that->table,
+                        'status' => SaleConstants::OPEN,
+                        'user_id' => $user->id,
+                        'table'   => $request['table']
+                    ];
+
+                    $sale = new Sale($data);
+
+                    $this->repository->save($sale);
                 }
-                $that = $this->productsTableRepository->find($productsTable->id);
-                $user = Auth::user();
-
-                $data = [
-                    'products_table_id' => $that->table,
-                    'status' => SaleConstants::OPEN,
-                    'user_id' => $user->id,
-                    'table'   => $request['table']
-                ];
-
-                $sale = new Sale($data);
-
-                $this->repository->save($sale);
             }
 
         }catch (\Exception $exception){
