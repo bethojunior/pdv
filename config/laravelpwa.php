@@ -70,7 +70,7 @@ return [
             [
                 'name' => 'Vendedor',
                 'description' => 'Fazer login',
-                'url' => '/ogin',
+                'url' => '/login',
                 'icons' => [
                     "src" => "/images/icons/icon-72x72.png",
                     "purpose" => "any"
