@@ -29,6 +29,7 @@ class CashierRepository extends AbstractRepository
                 $query->with('product');
             }])
             ->whereDate('created_at','=',Carbon::today())
+            ->orderByDesc('id')
             ->get();
     }
 
