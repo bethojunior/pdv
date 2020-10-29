@@ -149,6 +149,8 @@ class SaleService
         $id = $request['id'];
         $table = $this->repository->findTable($id);
 
+        //todo: pegar retorno do cashier e adicionar na tavela de products_cashier
+
         $this->cashierService
             ->create($request , $table);
 

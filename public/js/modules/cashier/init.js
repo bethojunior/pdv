@@ -9,9 +9,11 @@ elementProperty.addEventInElement('.show-products','onclick',function () {
     $('#modal-products').modal('show')
     totalValue = 0;
     let products = JSON.parse(this.getAttribute('products'));
+    let cashierId = this.id;
+    console.log(cashierId);
     let data = JSON.parse(this.getAttribute('data'));
-    console.log(data)
-    console.log(products)
+    // console.log(data)
+    // console.log(products)
 
     elementProperty.getElement('#mount-products', tbody => {
         let content = '';
@@ -20,6 +22,7 @@ elementProperty.addEventInElement('.show-products','onclick',function () {
             let products = item.product;
 
             content += products.map(product => {
+                // if (cashierId == )
                 selected.push(product);
                 totalValue = totalValue + product.value;
                 return `

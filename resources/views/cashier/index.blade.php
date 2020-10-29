@@ -68,7 +68,7 @@
                     <td>{{ $value['user'][0]['name'] }}</td>
                     <td>R$ {{ $value->value }}</td>
                     <td>
-                        <button data="{{ $value }}" products="{{$value->products}}"  class="btn btn-outline-info show-products">Ver</button>
+                        <button id="{{ $value->id }}" data="{{ $value }}" products="{{$value->products}}" class="btn btn-outline-info show-products">Ver</button>
                     </td>
                 </tr>
             @endforeach
