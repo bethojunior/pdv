@@ -58,7 +58,6 @@ elementProperty.addEventInElement('.closed-table','onclick',function () {
             return true;
 
         SalesController.closed(formData).then(response => {
-            console.log(response)
 
             if(!response.status)
                 return swal('Erro ao fechar mesa','Contate o suporte 24 hrs','info')

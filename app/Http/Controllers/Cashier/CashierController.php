@@ -31,8 +31,6 @@ class CashierController extends Controller
     {
         $today = $this->service
             ->today();
-
-//        dd($today);
         $valueToday = $this->service
             ->valueToday();
         $users = $this->userService

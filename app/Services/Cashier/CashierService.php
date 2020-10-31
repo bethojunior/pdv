@@ -54,16 +54,7 @@ class CashierService
         //todo: aqui deve inserir o cashier_id na tabela products_cashier
         $sale = $this->saleRepository->findOpen($table->table);
 
-        $data = json_decode($request['products']);
-        foreach ($data as $products){
-            foreach ($products->product as $product){
-                $app = new ProductsCashier([
-                    'product_id' => $product->id,
-                    'sale_id'    => $request['table']
-                ]);
-                $this->productsCashierRepository->save($app);
-            }
-        }
+        // Insere um registro na tabela cashier
         $data = [
             'user_id'  => $request['user'],
             'value'    => $request['value'],
@@ -71,7 +62,22 @@ class CashierService
             'sales_id' => $sale->id
         ];
         $cashier = new Cashier($data);
-        $this->repository->save($cashier);
+//        $new_cashier = $this->repository->save($cashier);
+        $new_cashier = $this->repository->create($data);
+
+        // Insere um registro na tabela products_cashier
+        $data = json_decode($request['products']);
+        foreach ($data as $products){
+            foreach ($products->product as $product){
+                $app = new ProductsCashier([
+                    'product_id' => $product->id,
+                    'cashier_id' => $new_cashier->id,
+                    'sale_id'    => $request['table']
+                ]);
+                $this->productsCashierRepository->save($app);
+            }
+        }
+
         return $cashier;
 
     }

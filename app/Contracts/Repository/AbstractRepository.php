@@ -103,7 +103,6 @@ abstract class AbstractRepository
             ->update($attributes, $options);
     }
 
-
     /**
      * @param Model $model
      * @return bool|null
