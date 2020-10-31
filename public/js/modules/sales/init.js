@@ -38,7 +38,6 @@ elementProperty.addEventInElement('.show-products','onclick',function () {
             })
         });
     })
-
 })
 
 elementProperty.addEventInElement('.closed-table','onclick',function () {
@@ -60,6 +59,7 @@ elementProperty.addEventInElement('.closed-table','onclick',function () {
 
         SalesController.closed(formData).then(response => {
             console.log(response)
+
             if(!response.status)
                 return swal('Erro ao fechar mesa','Contate o suporte 24 hrs','info')
 

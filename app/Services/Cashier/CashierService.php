@@ -51,6 +51,7 @@ class CashierService
      */
     public function create(array $request , $table)
     {
+        //todo: aqui deve inserir o cashier_id na tabela products_cashier
         $sale = $this->saleRepository->findOpen($table->table);
 
         $data = json_decode($request['products']);
