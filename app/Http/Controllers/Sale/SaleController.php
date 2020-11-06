@@ -41,6 +41,7 @@ class SaleController extends Controller
      */
     public function create(Request $request)
     {
+//        dd($request);
         try{
             $insert = $this->service
                 ->insert($request->all());
@@ -64,6 +65,7 @@ class SaleController extends Controller
     }
 
     /**
+     * Metodo que encerra uma mesa
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */

@@ -152,7 +152,9 @@ class SaleService
         $this->cashierService
             ->create($request , $table);
 
-        $table->update(['status' => SaleConstants::CLOSED]);
+        $table->update([
+            'status' => SaleConstants::CLOSED
+            ]);
 
         $products = $this->productsTableRepository
             ->getAllByTable($table->table);

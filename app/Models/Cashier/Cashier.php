@@ -27,7 +27,7 @@ class Cashier extends Model
      */
     public function products()
     {
-        return $this->hasMany(ProductsCashier::class,'sale_id','table');
+        return $this->hasMany(ProductsCashier::class,'cashier_id','id');
     }
 
 

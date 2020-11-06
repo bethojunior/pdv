@@ -10,8 +10,8 @@ elementProperty.addEventInElement('.show-products','onclick',function () {
     totalValue = 0;
     let products = JSON.parse(this.getAttribute('products'));
     let data = JSON.parse(this.getAttribute('data'));
-    console.log(data)
-    console.log(products)
+    // console.log(data)
+    // console.log(products)
 
     elementProperty.getElement('#mount-products', tbody => {
         let content = '';
